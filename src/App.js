@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
+import Formulario from './componentes/ Formulario';
+
+const Inicio = styled.div`
+background-color:#000;
+font-family: Arial, Helvetica, sans-serif;
+width: 100%;
+padding:10%;
+
+
+`;
+
+const Titulo = styled.h1`
+
+color:#fff;
+text-align: center;
+
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+      <Inicio>
+        <Titulo>contacto</Titulo>
+      </Inicio>
+
+      <br />
+
+      <Formulario />
+
+    </>
   );
 }
 

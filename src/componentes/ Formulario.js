@@ -4,7 +4,7 @@ import Contactos from './Contactos';
 
 
 const Formulario = () => {
-  const [contactos, guardarContactos] = useState([
+  const [contactos] = useState([
 
     {
       nombre: '', email: '', cedula: '',
@@ -16,19 +16,16 @@ const Formulario = () => {
     <>
 
 
-      <div className="row justify-content-center">
-        <div className="u-full-width">
-          {contactos.map((contacto) => (
-            <Contactos
-              key={contacto.id}
-              contacto={contacto}
-              guardarContactos={guardarContactos}
+      {contactos.map((contacto) => (
+        <Contactos
+          key={contacto.id}
+          contacto={contacto}
+        />
 
-            />
-          ))}
+      ))}
 
-        </div>
-      </div>
+      <br />
+
 
     </>
   );

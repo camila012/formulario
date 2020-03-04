@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+import Registrado from './Registrado';
 
 
-const Contactos = ({ contacto, guardarContactos }) => {
+const Contactos = ({ contacto }) => {
+  const [contactos, guardarContactos] = useState([
+
+    {
+      nombre: '', email: '', cedula: '',
+    },
+  ]);
   const [error, guardarError] = useState(false);
 
 
@@ -10,7 +17,7 @@ const Contactos = ({ contacto, guardarContactos }) => {
 
   const onclick = (e) => {
     guardarContactos({
-      ...contacto,
+      ...contactos,
       [e.target.name]: e.target.value,
 
     });
@@ -28,9 +35,12 @@ const Contactos = ({ contacto, guardarContactos }) => {
   return (
     <>
 
+
       <form
+        className="row justify-content-center"
         onSubmit={enviar}
       >
+
 
         {error ? <p className="red darken-4">TODOS LOS CAMPOS SON OBLIGATORIOS</p> : null}
 
@@ -40,7 +50,7 @@ const Contactos = ({ contacto, guardarContactos }) => {
           name="nombre"
           placeholder="Nombre"
           value={nombre.id}
-          onClick={() => onclick()}
+          onClick={onclick}
         />
 
         <input
@@ -48,8 +58,7 @@ const Contactos = ({ contacto, guardarContactos }) => {
           name="email"
           placeholder="email"
           value={email.id}
-          onClick={() => onclick()}
-
+          onClick={onclick}
         />
 
 
@@ -58,7 +67,7 @@ const Contactos = ({ contacto, guardarContactos }) => {
           name="cedula"
           placeholder="Cedula"
           value={cedula.id}
-          onClick={() => onclick()}
+          onClick={onclick}
         />
 
 
@@ -68,6 +77,17 @@ const Contactos = ({ contacto, guardarContactos }) => {
 
 
       </form>
+      <br />
+      <div className="row justify-content-center">
+
+        <Registrado
+          guardarContactos={guardarContactos}
+
+        />
+
+
+      </div>
+
     </>
   );
 };

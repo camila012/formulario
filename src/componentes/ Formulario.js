@@ -1,32 +1,61 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import Contactos from './Contactos';
-
-
-const Formulario = () => {
-  const [contactos] = useState([
-
-    {
-      nombre: '', email: '', cedula: '',
-    },
-  ]);
-
+const Formulario = ({ onSubmit, nextStep }) => {
+  function enviar() {
+    const user = {
+      name: 'New name',
+      email: 'newameil@asd.com',
+    };
+    onSubmit(user);
+    nextStep();
+  }
 
   return (
     <>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="input-group-append">
+              <input
+                className="form-control"
+                type="text"
+                name="nombre"
+                placeholder="Nombre"
+              />
+              <div className="input-group-append">
+                <input
+                  className="form-control"
+                  type="number"
+                  name="cedula"
+                  placeholder="Cedula"
+                />
+              </div>
+              <div className="input-group-append">
+                <input className="form-control" type="date" name="fecha" />
+              </div>
+              <div className="input-group-append">
+                <input
+                  className="form-control"
+                  type="text"
+                  name="pais"
+                  placeholder="Pais"
+                />
+              </div>
+              <div className="input-group-append" name="comentario">
+                <textarea className="form-control" />
+              </div>
 
-
-      {contactos.map((contacto) => (
-        <Contactos
-          key={contacto.id}
-          contacto={contacto}
-        />
-
-      ))}
-
-      <br />
-
-
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={enviar}
+              >
+                Enviar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

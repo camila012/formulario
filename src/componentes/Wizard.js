@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import StepWizard from 'react-step-wizard';
 import axios from 'axios';
+import styled from '@emotion/styled';
 import Formulario from './ Formulario';
 import ListaDeUsuarios from './ListaDeUsuarios';
-import { placeholderUrl } from '../utils/constants';
+
 
 const Wizard = () => {
   const [usuarios, guardarUsuarios] = useState([]);
 
   useEffect(() => {
     const consultarAPI = async () => {
-      const url = 'https://jsonplaceholder.typicode.com'; const responde = await axios.get(url);
+      const url = 'https://jsonplaceholder.typicode.com/users'; const responde = await axios.get(url);
       guardarUsuarios(responde.data);
-    }; consultarAPI();
-  }, [usuarios, guardarUsuarios]);
+    };
+    consultarAPI();
+  }, []);
 
-  async function onSubmitForm(newFormData) {
+  async function onSubmit(newFormData) {
     console.log('La data para enviar es', newFormData);
-    const response = await axios.post(`${placeholderUrl}/users`, newFormData);
+    const response = await axios.post('https://jsonplaceholder.typicode.com/users', newFormData);
     if (response.status === 201) {
-      guardarUsuarios([...usuarios, response.data]);
+      guardarUsuarios([response.data, ...usuarios]);
+      console.log(response.data);
+      console.log(usuarios);
     }
   }
 
+
   return (
     <>
-      <h2>Resultado</h2>
+
       <StepWizard>
-        <Formulario onSubmit={onSubmitForm} />
+        <Formulario onSubmit={onSubmit} />
         <ListaDeUsuarios usuarios={usuarios} />
       </StepWizard>
+
     </>
   );
 };

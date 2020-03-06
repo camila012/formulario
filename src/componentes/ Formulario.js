@@ -1,54 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Formulario = ({ onSubmit, nextStep }) => {
+  const [info, guardarInfo] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
+
+
   function enviar() {
-    const user = {
-      name: 'New name',
-      email: 'newameil@asd.com',
-    };
-    onSubmit(user);
+    console.log('info is', info);
+    onSubmit(info);
     nextStep();
+    console.log('nextStep:', nextStep);
   }
+
+  function actualizarInfo(campo, valor) {
+    guardarInfo({
+      ...info,
+      [campo]: valor,
+    });
+  }
+
 
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <div className="input-group-append">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-12">
+            <div>
               <input
                 className="form-control"
                 type="text"
-                name="nombre"
                 placeholder="Nombre"
+                onChange={(e) => actualizarInfo('name', e.target.value)}
+
               />
-              <div className="input-group-append">
+              <div>
                 <input
                   className="form-control"
-                  type="number"
-                  name="cedula"
-                  placeholder="Cedula"
+                  type="email"
+                  placeholder="Correo"
+                  onChange={(e) => actualizarInfo('email', e.target.value)}
                 />
               </div>
-              <div className="input-group-append">
-                <input className="form-control" type="date" name="fecha" />
-              </div>
-              <div className="input-group-append">
+
+              <div>
                 <input
                   className="form-control"
                   type="text"
-                  name="pais"
-                  placeholder="Pais"
+                  placeholder="Telefono"
+                  onChange={(e) => actualizarInfo('phone', e.target.value)}
                 />
               </div>
-              <div className="input-group-append" name="comentario">
-                <textarea className="form-control" />
-              </div>
 
+              <br />
               <button
-                className="btn btn-primary"
+                className="btn btn-info"
                 type="submit"
                 onClick={enviar}
+
               >
                 Enviar
               </button>
